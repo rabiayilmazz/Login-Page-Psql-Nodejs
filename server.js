@@ -9,16 +9,16 @@ app.get('/', (req,res)=>{
     res.render('index');
 });
 
-app.get('users/login', (req, res)=>{
-    res.render("login")
+app.get('/users/login', (req, res)=>{
+    res.render('login')
 });
 
-app.get('users/register', (req, res)=>{
-    res.render("register")
+app.get('/users/register', (req, res)=>{
+    res.render('register')
 });
 
-app.get('users/dashboard', (req, res)=>{
-    res.render("dashboard", {user: "Rabia"})
+app.get('/users/dashboard', (req, res)=>{
+    res.render('dashboard', {user: 'Rabia'});
 });
 
 app.listen(PORT, () =>{
