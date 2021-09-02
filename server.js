@@ -89,8 +89,7 @@ app.post('/users/register', async (req, res)=>{
                         VALUES ($1, $2, $3)`, 
                         [name, email, hashedPassword],
                         (err, result)=>{
-                            
-                            console.log(results.rows);
+                            console.log(err);
                             req.flash('success_msg', "Kaydoldunuz, lütfen giriş yapın");
                             res.redirect("/users/login");
                         }
