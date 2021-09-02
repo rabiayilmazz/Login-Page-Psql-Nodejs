@@ -26,7 +26,8 @@ app.use(
     })
 );
 
-
+app.use(passport.initialize);
+app.use(passport.session);
 
 app.use(flash());
 
@@ -105,9 +106,15 @@ app.post('/users/register', async (req, res)=>{
 
                 }
             }
-        )
+        );
     }
-})
+});
+
+app.post("/users/login", passport.authenticate('local',{
+    succesRedirect: "/users/dashboard",
+
+} ))
+
 app.listen(PORT, () =>{
     console.log(`server server çalışıyor port: ${PORT}`);
 });
