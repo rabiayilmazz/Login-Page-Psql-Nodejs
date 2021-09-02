@@ -4,6 +4,12 @@ const {pool} = require("./dbConfig");
 const bcrypt = require('bcrypt');
 const session = require ('express-session');
 const flash = require('express-flash');
+const passport = require('passport');
+
+
+const initialize = require("./passportConfig");
+
+initialize(passport);
 
 const PORT = process.env.PORT || 8080;
 
@@ -19,6 +25,8 @@ app.use(
         saveUninitialized: false
     })
 );
+
+
 
 app.use(flash());
 
