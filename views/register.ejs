@@ -11,13 +11,23 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Register</h1>
+    <div class="container">
+        <div class="row">
+          <div class="col-1">
+          </div>
+          <div class="col text-center">
+            <h1>Register</h1>
+    <ul>
+        <% if(typeof errors != 'undefined'){ %>
+        <div class="alert alert-danger " role="alert">
+            <strong>Bir hata oluştu!</strong> 
+             <% errors.forEach(error=>{ %>
+                <li><%= error.message %> </li>
+            <% }) %> </div>
+        <% } %> 
+    </ul>
     <div id="errors">
-        <ul>
-            <% if(typeof errors != 'undefined'){ %> <% errors.forEach(error=>{ %> 
-                 <li><%= error.message %> </li>
-            <% }) %> <% } %> 
-        </ul>
+        
     </div>
     <form action="/users/register" method="POST">
     <div>
@@ -63,5 +73,12 @@
         <a href="/users/login">Login</a>
     </div>
     </form>
+
+          </div>
+          <div class="col-1">
+          </div>
+        </div>
+      </div>
+
 </body>
 </html>
