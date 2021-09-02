@@ -20,15 +20,20 @@
     <ul>
         <% if(typeof errors != 'undefined'){ %>
         <div class="alert alert-danger " role="alert">
-            <strong>Bir hata oluştu!</strong> 
+            <strong>
              <% errors.forEach(error=>{ %>
-                <li><%= error.message %> </li>
-            <% }) %> </div>
-        <% } %> 
-    </ul>
-    <div id="errors">
+                <li><%=error.message %> </li>
+            <% }) %> </strong> </div>
+        <% } %>
         
-    </div>
+        <% if(typeof success != 'undefined'){ %>
+        <div class="alert alert-success" role="alert">
+            <strong>
+                <% success.forEach(suc=>{ %>
+                <li><%=suc.message %> </li>
+            <% }) %> </strong> </div>
+        <% } %>
+    </ul>
     <form action="/users/register" method="POST">
     <div>
         <input 

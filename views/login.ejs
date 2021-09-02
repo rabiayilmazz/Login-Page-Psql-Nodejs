@@ -11,6 +11,13 @@
 </head>
 <body>
     <h1>Login</h1>
+        <ul>
+            <% if(messages.success_msg) { %>
+                <div class="alert alert-success" role="alert">
+                    <li><%=messages.success_msg %> </li>
+                </div>
+                <% } %> 
+        </ul> 
     <form action="/users/login" method="POST">
     <div>
         <input 
