@@ -7,9 +7,9 @@ const flash = require('express-flash');
 const passport = require('passport');
 
 
-const initialize = require("./passportConfig");
+const initializePassport = require("./passportConfig");
 
-initialize(passport);
+initializePassport(passport);
 
 const PORT = process.env.PORT || 8080;
 
