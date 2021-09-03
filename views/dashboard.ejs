@@ -4,27 +4,31 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link 
-    rel="stylesheet" 
-    href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+   
     <title>Document</title>
 </head>
 <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
-
-    <a href="/users/logout">Logout</a>
     
-    <div class="alert alert-success" role="alert">
-        <h4 class="alert-heading"><%= user.charAt(0).toUpperCase() + user.slice(1) %></h4>
-        Merhaba
-      </div>
-
       <div class="container">
-        <div class="btn-group-vertical" role="group" aria-label="Basic example">
-            <button type="button" class="btn btn-secondary"><a href="/calculator">Hesap Makinesi</a></button>
-            <button type="button" class="btn btn-secondary"><a href="/hangman">Adam Asmaca</a></button>
-            <button type="button" class="btn btn-secondary"><a href="/task">Proje</a></button>
+        <div class="alert alert-success text-center" role="alert">
+            <h1><strong>Merhaba </strong><%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
+        </div>
+        <div class="row">
+          <div class="col text-center">
+            <div class="btn-group" role="group" aria-label="Basic example">
+                <a href="/calculator"><button type="button" class="btn btn-secondary disable m-1">Hesap Makinesi</button></a>
+                <a href="/hangman"><button type="button" class="btn btn-secondary disable m-1">Adam Asmaca</button></a>
+                <a href="/task"><button type="button" class="btn btn-secondary disable m-1">Proje</button></a>
+              </div>
           </div>
+          <div class="col text-center">
+              <div class="float-right">
+                <a href="/users/logout"><button type="button" class="btn btn-danger">Logout</button></a>
+              </div>
+          </div>
+        </div>
       </div>
 </body>
 </html>
