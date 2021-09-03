@@ -9,9 +9,22 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css">
     <title>Document</title>
 </head>
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <body>
 
     <a href="/users/logout">Logout</a>
-    <h1>Hello <%= user%> </h1>
+    
+    <div class="alert alert-success" role="alert">
+        <h4 class="alert-heading"><%= user.charAt(0).toUpperCase() + user.slice(1) %></h4>
+        Merhaba
+      </div>
+
+      <div class="container">
+        <div class="btn-group-vertical" role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-secondary"><a href="/calculator">Hesap Makinesi</a></button>
+            <button type="button" class="btn btn-secondary"><a href="/hangman">Adam Asmaca</a></button>
+            <button type="button" class="btn btn-secondary"><a href="/task">Proje</a></button>
+          </div>
+      </div>
 </body>
 </html>

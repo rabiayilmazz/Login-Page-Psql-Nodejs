@@ -27,7 +27,7 @@ app.use(
 );
 
 app.use(passport.initialize());
-app.use(passport.session);
+app.use(passport.session());
 
 app.use(flash());
 
@@ -35,16 +35,26 @@ app.get('/', (req,res)=>{
     res.render('index');
 });
 
-app.get('/users/login', (req, res)=>{
+app.get('/users/login', checkAutenticated, (req, res)=>{
     res.render('login')
 });
 
-app.get('/users/register', (req, res)=>{
+app.get('/users/register', checkAutenticated, (req, res)=>{
     res.render('register')
 });
 
-app.get('/users/dashboard', (req, res)=>{
-    res.render('dashboard', {user: 'Rabia'});
+app.get('/users/dashboard', checkNotAutenticated, (req, res)=>{
+    res.render('dashboard', {user: req.user.name});
+});
+
+app.get('/users/logout', (req, res)=>{
+    req.logOut();
+    req.flash("success_msg", "Çıkış yaptınız.");
+    res.redirect('/users/login');
+});
+
+app.get('/calculator', checkNotAutenticated, (req, res)=>{
+    res.render('calculator', {user: req.user.name});
 });
 
 app.post('/users/register', async (req, res)=>{
@@ -111,11 +121,26 @@ app.post('/users/register', async (req, res)=>{
 });
 
 app.post("/users/login", passport.authenticate('local',{
-    succesRedirect: "/users/dashboard",
+    successRedirect: "/users/dashboard",
     failureRedirect: "/users/login",
     failureFlash: true
 
 } ));
+
+function checkAutenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return res.redirect('/users/dashboard');
+    }
+    next();
+}
+
+function checkNotAutenticated(req, res, next){
+    if(req.isAuthenticated()){
+        return next();
+    }
+
+    res.redirect('/users/login');
+}
 
 app.listen(PORT, () =>{
     console.log(`server server çalışıyor port: ${PORT}`);

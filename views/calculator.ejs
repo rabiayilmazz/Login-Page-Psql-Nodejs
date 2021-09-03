@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+
+        table {
+            width: 200px;
+            margin: 50px auto;
+            background: gray;
+            border: none;
+            border-radius: 10px;
+            padding: 20px 20px 20px;
+        }
+        .header{
+            color: white;
+            font-size: 130%;
+            text-align:center;
+            padding: 10px;
+        }
+        .result{
+            text-align: right;
+            border: none;
+        }
+        .result, .calculate{
+            border-radius: 10px;
+        }
+        button:hover{
+            background: #cbcbcb;
+            cursor: pointer;
+            font-size: 110%;
+        }
+        button{
+            height: 30px;
+            width: 80px;
+            font-size: 100%;
+            color: blue;
+            background: white;
+            margin: 1px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        b{
+            margin: 2px;
+            font-size: 120%;
+        }
+
+        input[type=text]{
+            font-size: 130%;
+            color: rgb(0, 0, 0);
+            background: white;
+            margin: 1px;
+            border-radius: 8px;
+            border: none;
+        }
+
+    </style>
+</head>
+
+<body>
+    <table class="table">
+        <tr>
+            <tr><td colspan="3" class="header">Hesap Makinesi</td></tr>
+            <td colspan="3"><input type="text" id="operationContent"><br></td>
+        </tr>
+        <tr class="result">
+            <td><b>Sonuç:</b><b id="result">0</b></td>
+            <td><button id="calculate">Calculate</button></td>
+            <td><button id="clear">Clear</button></td>
+        </tr>
+    </table>
+  
+</body>
+<script>
+    let operationContentInput = document.getElementById('operationContent');
+    let calculateInput = document.getElementById('calculate');
+    let resultInput = document.getElementById('result');
+    let clear = document.getElementById('clear');
+    
+    let calculate = (operationCarrierFunction) => {
+        return new Function(`return ${operationCarrierFunction}`)();
+    }
+    
+    calculateInput.addEventListener('click', event => {
+    
+        let operation = operationContentInput.value;
+    
+        for (var i = 0; i < operation.length; i++) {
+            operation = operation.replace(")(", ")*(");
+        }
+    
+        for(var j = 0; j < 10; j++){
+            for (var i = 0; i < operation.length; i++) {
+                operation = operation.replace(")" + j, ")*" + j);
+            }
+            for (var i = 0; i < operation.length; i++) {
+                operation = operation.replace(j + "(", j + "*(");
+            }
+        }
+        resultInput.innerText = calculate(operation);
+    });
+    
+    let Clear = (yeni) => {
+        return new Function(`return ${yeni}`)();
+    }
+    
+    clear.addEventListener('click', event => {
+        resultInput.innerText = Clear("0");
+        operationContentInput.value = "";
+    });
+    
+    </script>
+</html>
