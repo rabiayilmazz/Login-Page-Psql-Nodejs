@@ -57,6 +57,10 @@ app.get('/calculator', checkNotAutenticated, (req, res)=>{
     res.render('calculator', {user: req.user.name});
 });
 
+app.get('/hangman', checkNotAutenticated, (req, res)=>{
+    res.render('hangman');
+});
+
 app.post('/users/register', async (req, res)=>{
     let {name, email, password, password2} = req.body;
 

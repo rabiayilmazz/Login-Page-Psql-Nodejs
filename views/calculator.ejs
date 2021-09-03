@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+   
     <title>Document</title>
     <style>
 
@@ -62,17 +64,32 @@
 </head>
 
 <body>
-    <table class="table">
-        <tr>
-            <tr><td colspan="3" class="header">Hesap Makinesi</td></tr>
-            <td colspan="3"><input type="text" id="operationContent"><br></td>
-        </tr>
-        <tr class="result">
-            <td><b>Sonuç:</b><b id="result">0</b></td>
-            <td><button id="calculate">Calculate</button></td>
-            <td><button id="clear">Clear</button></td>
-        </tr>
-    </table>
+
+    <div class="container">
+        <div class="alert alert-success text-center" role="alert">
+            <h1><strong>Hesap Makinesine Hoş Geldin </strong><%= user.charAt(0).toUpperCase() + user.slice(1) %></h1>
+        </div>
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col">
+            <table class="table">
+                <tr>
+                    <tr><td colspan="3" class="header">Hesap Makinesi</td></tr>
+                    <td colspan="3"><input type="text" id="operationContent"><br></td>
+                </tr>
+                <tr class="result">
+                    <td><b>Sonuç:</b><b id="result">0</b></td>
+                    <td><button id="calculate">Calculate</button></td>
+                    <td><button id="clear">Clear</button></td>
+                </tr>
+            </table>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </div>
+   
   
 </body>
 <script>
