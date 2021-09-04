@@ -177,6 +177,11 @@ app.get('/hangman:harf', function(req, res) {
     res.end();
     });
 
+app.get('/files', checkNotAutenticated, function(req, res) { 
+    
+    res.render('files');  
+});
+
 
 function checkAutenticated(req, res, next){
     if(req.isAuthenticated()){
