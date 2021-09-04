@@ -12,44 +12,54 @@
    
 </head>
 <body>
-    <h1>Login</h1>
-        <ul>
-            <% if(messages.success_msg) { %>
-                <div class="alert alert-success" role="alert">
-                    <li><%=messages.success_msg %> </li>
-                </div>
+    <div class="container">
+        <h1>Login</h1>
+        <div class="row">
+          <div class="col">
+          </div>
+          <div class="col">
+            <ul>
+                <% if(messages.success_msg) { %>
+                    <div class="alert alert-success" role="alert">
+                        <li><%=messages.success_msg %> </li>
+                    </div>
+                    <% } %> 
+            </ul> 
+            <ul>
+                <% if(messages.error){ %> 
+                    <li><%=messages.error %> </li>
                 <% } %> 
-        </ul> 
-        <ul>
-            <% if(messages.error){ %> 
-                <li><%=messages.error %> </li>
-            <% } %> 
-        </ul>
-    <form action="/users/login" method="POST">
-    <div>
-        <input 
-            type="email" 
-            id="email" 
-            name="email" 
-            placeholder="Email" 
-            required
-        />
-    </div>
-    <div>
-        <input 
-            type="password" 
-            id="password" 
-            name="password" 
-            placeholder="Password" 
-            required
-        />
-    </div>
-    <div>
-        <input type="submit" value="Login">
-    </div>
-    <div>
-        <a href="/users/register">Create Account</a>
-    </div>
-    </form>
+            </ul>
+        <form action="/users/login" method="POST">
+        <div>
+            <input 
+                type="email" 
+                id="email" 
+                name="email" 
+                placeholder="Email" 
+                required
+            />
+        </div>
+        <div>
+            <input 
+                type="password" 
+                id="password" 
+                name="password" 
+                placeholder="Password" 
+                required
+            />
+        </div>
+        <div>
+            <input type="submit" value="Login">
+        </div>
+        <div>
+            <a href="/users/register">Create Account</a>
+        </div>
+        </form>
+          </div>
+          <div class="col">
+          </div>
+        </div>
+      </div>
 </body>
 </html>
