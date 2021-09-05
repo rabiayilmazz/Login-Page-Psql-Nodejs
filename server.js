@@ -5,6 +5,9 @@ const bcrypt = require('bcrypt');
 const session = require ('express-session');
 const flash = require('express-flash');
 const passport = require('passport');
+const fs = require('fs');
+const formidable = require('formidable');
+
 
 app.use(express.static("public"));
 
@@ -177,11 +180,26 @@ app.get('/hangman:harf', function(req, res) {
     res.end();
     });
 
-app.get('/files', checkNotAutenticated, function(req, res) { 
+app.get('/files', function(req, res) { 
     
     res.render('files');  
 });
 
+app.post('/yukleme', function(req, res) { 
+    res.render('files')
+    let yukleme = new formidable.IncomingForm();
+  yukleme.parse(req, function (err, fields, files) {
+
+    let dosyaYolu = files.yuklenecek_dosya.path;
+    let yuklenecekYer = __dirname + '/' + files.yuklenecek_dosya.name;
+
+    fs.rename(dosyaYolu, yuklenecekYer, function (error) {
+      if (error) throw error;
+      res.send('Dosya başarıyla yüklendi.');
+    });
+
+  });
+});
 
 function checkAutenticated(req, res, next){
     if(req.isAuthenticated()){

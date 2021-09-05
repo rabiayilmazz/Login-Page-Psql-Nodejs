@@ -12,7 +12,10 @@
     <div class="container align-items-center">
         <div class="row">
           <div class="col m-50">
-            <input type="file" class="form-control-file p-10" id=""> dosya
+            <form action="yukleme" method="POST" enctype="multipart/form-data">
+              <input type="file" name="yuklenecek_dosya" required="required" />
+              <input type="submit" />
+            </form>
           </div>
           <div class="col">
             <table class="table table-sm">
