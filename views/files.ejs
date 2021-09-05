@@ -13,8 +13,15 @@
         <div class="row">
           <div class="col m-50">
             <form action="yukleme" method="POST" enctype="multipart/form-data">
-              <input type="file" name="yuklenecek_dosya" required="required" />
+              <input type="file" name="dosya" required="required" />
               <input type="submit" />
+            </form>
+            <form action="/yukleme" enctype="multipart/form-data" method="post">
+              <div class="form-group">
+                <input type="file" class="form-control-file" name="uploaded_file">
+                <input type="text" class="form-control" placeholder="Number of speakers" name="nspeakers">
+                <input type="submit" value="Get me the stats!" class="btn btn-default">            
+              </div>
             </form>
           </div>
           <div class="col">
