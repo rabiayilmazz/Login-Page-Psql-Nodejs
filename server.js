@@ -129,7 +129,6 @@ app.post('/users/register', async (req, res)=>{
                             res.redirect("/users/login");
                         }
                     );
-
                 }
             }
         );
@@ -187,18 +186,16 @@ app.get('/files', function(req, res) {
 
 app.post('/yukleme', function(req, res) { 
     res.render('files')
-    let yukleme = new formidable.IncomingForm();
-  yukleme.parse(req, function (err, fields, files) {
-
-    let dosyaYolu = files.yuklenecek_dosya.path;
-    let yuklenecekYer = __dirname + '/' + files.yuklenecek_dosya.name;
-
-    fs.rename(dosyaYolu, yuklenecekYer, function (error) {
-      if (error) throw error;
-      res.send('Dosya başarıyla yüklendi.');
-    });
-
-  });
+    if (req.url == '/yukleme') {
+        let veriler = '';
+        req.on('data', veri => veriler += veri);
+        req.on('end', () => console.log(veriler));
+        console.log(veriler.filename);
+        res.end();
+      } else {
+        res.writeHead(200, { 'Content-type': 'text/html' });
+        fs.createReadStream('files.ejs').pipe(res);
+      } 
 });
 
 function checkAutenticated(req, res, next){
