@@ -16,8 +16,9 @@
         <div class="row">
           <div class="col m-50">
             <br>
-            <form action="image" method="POST" enctype="multipart/form-data">
-              <input type="file" name="dosya" required="required" />
+            <form action="upload" method="POST" enctype="multipart/form-data">
+              <input type="file" name="dosya"  />
+              <input type="text" name="text" placeholder="deneme"/>
               <input type="submit" />
             </form>
           </div>
@@ -53,9 +54,4 @@
         </div>
       </div>
 </body>
-<script language="javascript">
-    function DoPost(){
-      $.post("server.js", { id: "id"} );  //Your values here..
-   }
-</script>
 </html>

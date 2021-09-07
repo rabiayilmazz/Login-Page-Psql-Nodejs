@@ -218,79 +218,31 @@ app.get('/files', function(req, res) {
     res.render('files');  
 });
 
-/*app.post('/yukleme', function(req, res) { 
+app.post('/upload', function(req, res) { 
     res.render('files')
     
-    if (req.url == '/yukleme') {
+    if (req.url == '/upload') {
         let veriler = '';
         req.on('data', veri => veriler += veri);
-        req.on('end', () => console.log(veriler));
+        req.on('end', () => console.log("değerler" + veriler));
+        
+      /*pool.query(
+        `INSERT INTO image_files (id, filename, filepath, mimetype)
+        VALUES (2, $1)`, 
+        [veriler],
+        (err, result)=>{
+            console.log(err);
+            req.flash('success_msg', "kaydoldu");
+            res.redirect("/users/login");
+        }
+    );*/
         res.end();
       } else {
         res.writeHead(200, { 'Content-type': 'text/html' });
-        fs.createReadStream('form.html').pipe(res);
+        fs.createReadStream('files.ejs').pipe(res);
       }
-});*/
 
-app.get('/image', (req, res)=>{
-    
-    res.render('files');  
-});
-app.post('/image', imageUpload.single('image'), (req, res) => { 
-    res.render('files'); 
-    const { filename, mimetype, size } = req.file;
-    const filepath = req.file.path;
-    db
-        
-    .insert({
-            filename,
-            filepath,
-            mimetype,
-            size,
-        })
-        .into('image_files')
-        .then(() => res.json({ success: true, filename }))
-        .catch(err => res
-                          .json(
-                              { 
-                                  success: false,
-                                  message: 'upload failed',
-                                  stack: err.stack,
-                              }
-                          )
-        );  
-});
 
-app.get('/image/:filename', (req, res) => {
-    const { filename } = req.params;
-    db
-    .select('*')
-        .from('image_files')
-        .where({ filename })
-        .then(images => {
-            if (images[0]) {
-                const dirname = path.resolve();
-                const fullfilepath = path.join(
-                                         dirname, 
-                                         images[0].filepath);
-                return res
-                           .type(images[0].mimetype)
-                           .sendFile(fullfilepath);
-            }
-            return Promise.reject(
-                new Error('Image does not exist')
-            );
-        })
-        .catch(err => res
-                          .status(404)
-                          .json(
-                              {
-                                  success: false, 
-                                  message: 'not found', 
-                                  stack: err.stack,
-                               }
-                          ),
-        );
 });
 
 function checkAutenticated(req, res, next){
