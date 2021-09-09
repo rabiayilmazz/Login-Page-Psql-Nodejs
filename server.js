@@ -8,6 +8,8 @@ const passport = require('passport');
 const morgan = require('morgan');
 const multer = require('multer');
 
+const upload = multer({ dest: 'uploads/' });
+
 const knex = require('knex');
 // Create database object
 const db = knex(
@@ -218,32 +220,30 @@ app.get('/files', function(req, res) {
     res.render('files');  
 });
 
-app.post('/upload', function(req, res) { 
+app.post('/upload', function(req, res){ 
     res.render('files')
     
     if (req.url == '/upload') {
         let veriler = '';
         req.on('data', veri => veriler += veri);
         req.on('end', () => console.log("değerler" + veriler));
-        
-      /*pool.query(
-        `INSERT INTO image_files (id, filename, filepath, mimetype)
-        VALUES (2, $1)`, 
-        [veriler],
-        (err, result)=>{
-            console.log(err);
-            req.flash('success_msg', "kaydoldu");
-            res.redirect("/users/login");
-        }
-    );*/
-        res.end();
-      } else {
-        res.writeHead(200, { 'Content-type': 'text/html' });
-        fs.createReadStream('files.ejs').pipe(res);
-      }
-
-
+    }
 });
+
+app.get('/:filename', upload.single('avatar'), (req, res, next) => {
+    const { path, mimetype } = req.file 
+    const img = fs.readFileSync(path)
+    const encodedImg = img.toString('base64');
+    const finalImg = {
+      contentType: mimetype,
+      image:  new Buffer(encodedImg, 'base64')
+    }  
+    if (!req.file) 
+        return res.send('Please upload a file') ; 
+    res.sendStatus(200)
+  });
+
+
 
 function checkAutenticated(req, res, next){
     if(req.isAuthenticated()){
@@ -313,5 +313,4 @@ function kazandiniz(){
 app.listen(PORT, () =>{
     console.log(`server server çalışıyor port: ${PORT}`);
 });
-
 
